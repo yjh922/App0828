@@ -1,3 +1,4 @@
+<%@page import="org.sp.app0828.domain.Admin"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
 			<!-- Brand Logo -->
@@ -16,7 +17,12 @@
 							class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info">
-						<a href="#" class="d-block">Alexander Pierce</a>
+						<%
+							//로그인 성공한 자는 세션에 admin dto를 넣어두었으므로, 필요할 때는 언제든지(브라우저 닫지 X) 이 요청과 관련된 세션을 접근할 수 있다.
+							Admin admin=(Admin)session.getAttribute("admin");
+						
+						%>
+						<a href="#" class="d-block"><%//=admin.getAdmin_id() %></a>
 					</div>
 				</div>
 
@@ -51,11 +57,11 @@
 									class="nav-link active"> <i class="far fa-circle nav-icon"></i>
 										<p>카테고리 관리</p>
 								</a></li>
-								<li class="nav-item"><a href="./index2.html"
+								<li class="nav-item"><a href="/admin/product/registform"
 									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>상품등록</p>
 								</a></li>
-								<li class="nav-item"><a href="./index3.html"
+								<li class="nav-item"><a href="/admin/product/list"
 									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>상품목록</p>
 								</a></li>
