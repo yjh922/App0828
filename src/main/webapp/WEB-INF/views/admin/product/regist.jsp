@@ -106,14 +106,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label>하위카테고리</label> 
-											<select name="subcategory_idx" class="form-control select2" style="width: 100%;">
-												<option selected="selected">Alabama</option>
-												<option>Alaska</option>
-												<option>California</option>
-												<option>Delaware</option>
-												<option>Tennessee</option>
-												<option>Texas</option>
-												<option>Washington</option>
+											<select id="subcategory_idx" name="subCategory.subcategory_idx" class="form-control select2" style="width: 100%;">
 											</select>
 									</div>
 									<!-- /.form-group -->
@@ -125,7 +118,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">							
-										<input type="text" class="form-control" placeholder="상품명">								
+										<input type="text" class="form-control" name="product_name" placeholder="상품명">								
 									</div>
 								</div>
 							</div>
@@ -133,7 +126,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">							
-										<input type="text" class="form-control" placeholder="브랜드명">								
+										<input type="text" class="form-control" name="brand" placeholder="브랜드명">								
 									</div>
 								</div>
 							</div>
@@ -141,7 +134,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">							
-										<input type="number" class="form-control" placeholder="가격">								
+										<input type="number" class="form-control" name="price" placeholder="가격">								
 									</div>
 								</div>
 							</div>
@@ -149,7 +142,24 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">							
-										<textarea id="summernote" style="display: none;"> </textarea>
+										<textarea id="summernote" name="detail" style="display: none;"> </textarea>
+										
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">							
+										<input type="file" name="photo">
+										
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-md-2">
+									<div class="form-group">							
+										<button type="button" class="btn btn-block btn-primary" id="bt_regist">상품등록</button>
 										
 									</div>
 								</div>
@@ -204,17 +214,25 @@
 					
 					//기존의 서브카테고리 option 요소 제거하기
 					//how to remove all option in select box using jquery
-					$("select[name='subcategory_idx']").empty();
+					$("#subcategory_idx").empty();
 					
 					let tag="<option value='0'>하위 카테고리 선택</option>";
 					
 					for(let i=0;i<result.length;i++){
 						tag+="<option value='"+result[i].subcategory_idx+"'>"+result[i].sub_name+"</option>";
 					}
-					$("select[name='subcategory_idx']").html(tag);	
+					$("#subcategory_idx").html(tag);	
 					
 				}
 			});
+		}
+		
+		function regist(){
+			$("#form1").attr({
+				action:"/admin/product/regist",
+				method:"post"
+			});
+			$("#form1").submit();
 		}
 		
 		$(function(){
@@ -226,6 +244,11 @@
 			
 			//서머노트 연결하기 
 			$("#summernote").summernote();
+			
+			//상품등록 버튼에 이벤트 연결
+			$("#bt_regist").click(function(){
+				regist();
+			});
 			
 		});		
 	</script>

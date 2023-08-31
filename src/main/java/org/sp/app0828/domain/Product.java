@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Product {
 	private int product_idx;
-	private SubCategory subcategory;
+	private SubCategory subCategory;
 	private String product_name;
 	private String brand;
 	private int price;
